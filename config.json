@@ -1,0 +1,60 @@
+{
+    "Ngnix Access": {
+        "ssh"       : {
+            "host"  : "127.0.0.1",
+            "port"  : 2222,
+            "user"  : "vagrant",
+            "pass"  : "vagrant"
+        },
+        "isFile"    : true,
+        "path"      : "/var/log/nginx/access.log",
+        "parser"    : "ngnix_access"
+    },
+
+    "Ngnix Error": {
+        "ssh"       : {
+            "host"  : "127.0.0.1",
+            "port"  : 2222,
+            "user"  : "vagrant",
+            "pass"  : "vagrant"
+        },
+        "isFile"    : true,
+        "path"      : "/var/log/nginx/error.log"
+    },
+
+    "Solr": {
+        "ssh"       : {
+            "host"  : "127.0.0.1",
+            "port"  : 2222,
+            "user"  : "vagrant",
+            "pass"  : "vagrant"
+        },
+        "isFile"    : true,
+        "path"      : "/home/vagrant/solr/example/logs/solrd.log",
+        "parser"    : "solr"
+    },
+
+    "Mage System": {
+        "ssh"       : {
+            "host"  : "127.0.0.1",
+            "port"  : 2222,
+            "user"  : "vagrant",
+            "pass"  : "vagrant"
+        },
+        "isFile"    : true,
+        "path"      : "/vagrant/var/log/system.log",
+        "parser"    : "mage_log"
+    },
+
+    "Mage Exception": {
+        "ssh"       : {
+            "host"  : "127.0.0.1",
+            "port"  : 2222,
+            "user"  : "vagrant",
+            "pass"  : "vagrant"
+        },
+        "isFile"    : true,
+        "path"      : "/vagrant/var/log/exception.log",
+        "parser"    : "mage_log"
+    }
+}

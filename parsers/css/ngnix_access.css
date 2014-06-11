@@ -1,0 +1,22 @@
+.ngnix-code {
+    padding:0 5px;
+    color:black;
+}
+.ngnix-method {
+    display:inline-block;
+    min-width:40px;
+    text-align:left;
+    color:gray;
+}
+.ngnix-code2 {
+    background:green;
+}
+.ngnix-code3 {
+    background:yellow;
+}
+.ngnix-code4 {
+    background:red;
+}
+.ngnix-code5 {
+    background:orange;
+}

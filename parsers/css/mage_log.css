@@ -1,0 +1,31 @@
+.mage-system-level {
+    display:inline-block;
+    color:black;
+    padding:0 3px;
+    text-align:center;
+    margin:0 5px 0 0;
+}
+.mage-system-level-0 {
+    background: #ff0000;
+}
+.mage-system-level-1 {
+    background: #ff0000;
+}
+.mage-system-level-2 {
+    background: #ff0000;
+}
+.mage-system-level-3 {
+    background: #ff0000;
+}
+.mage-system-level-4 {
+    background: #c05252;
+}
+.mage-system-level-5 {
+    background: #a08484;
+}
+.mage-system-level-6 {
+    background: #74763c;
+}
+.mage-system-level-7 {
+    background: #e4ea4b;
+}

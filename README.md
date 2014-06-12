@@ -13,6 +13,9 @@ git clone git@github.com:orkz/magelog.git .
 npm install
 ```
 
+## Configuration
+Edit config.json. 
+
 ## Usage
 ```bash
 node index.js

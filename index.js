@@ -59,7 +59,7 @@ wss.on('connection', function (ws) {
         // nah, file/tool is on local machine
         else {
             process = data.isFile
-                ? spawn('tail', ['-f ' + data.path])
+                ? spawn('tail', ['-f', data.path])
                 : spawn(data.path);
         }
 

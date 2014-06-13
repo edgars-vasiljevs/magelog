@@ -1,0 +1,48 @@
+#content_varnishlog > div {
+    padding:0 10px;
+}
+.varnish-request {
+    padding:0;
+    background:#111;
+    overflow:hidden;
+    margin:0 0 1px 0;
+}
+.varnish-request span {
+    padding:2px;
+}
+.varnish-request span:first-child {
+    float:left;
+    margin-right:10px;
+    width:50px;
+    text-align:center;
+}
+.varnish-request span + span {
+    display:block;
+}
+.varnish-from-pipe {
+    background:#8D5D15;
+    color:black;
+}
+.varnish-from-cache {
+    background:green;
+    color:black;
+}
+.varnish-from-server {
+    background:#9E0101;
+    color:#460505;
+}
+.varnish-hash {
+    margin:1px 0 0 30px;
+}
+.varnish-request > div:first-child + .varnish-hash {
+    margin-top:10px;
+}
+.varnish-hash span + span {
+    display:block;
+}
+.varnish-hash span:first-child {
+    float:left;
+    margin-right:10px;
+    width:50px;
+    text-align:center;
+}

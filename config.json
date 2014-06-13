@@ -56,5 +56,17 @@
         "isFile"    : true,
         "path"      : "/vagrant/var/log/exception.log",
         "parser"    : "mage_log"
+    },
+
+    "Varnishlog": {
+        "ssh"       : {
+            "host"  : "127.0.0.1",
+            "port"  : 2222,
+            "user"  : "vagrant",
+            "pass"  : "vagrant"
+        },
+        "isFile"    : false,
+        "path"      : "varnishlog",
+        "parser"    : "varnishlog"
     }
 }

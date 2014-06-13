@@ -24,6 +24,11 @@ function Hash() {
     return this;
 }
 
+function getFrom(hash, lower) {
+    var from = hash.pipe ? 'Pipe' : (hash.hit ? 'Cache' : 'Server');
+    return lower ? from.toLowerCase() : from;
+}
+
 function printLine(data) {
     delete dataBuffer[data.id];
 
@@ -72,34 +77,22 @@ function printLine(data) {
 
     if (hashes.length <= 1) {
         context.hashes = '';
-        context.from = hashes[0].pipe
-            ? 'Pipe'
-            : (hashes[0].hit ? 'Cache' : 'Server');
-        context.class = hashes[0].pipe
-            ? 'pipe'
-            : (hashes[0].hit? 'cache' : 'server');
+        context.from = getFrom(hashes[0]);
+        context.class = getFrom(hashes[0], true);
     }
     else {
-
         // If multiple lookups, get main lookup
-        var hashHTML = '';
-
         for(var i in hashes) {
             var hash = hashes[i]
             if (hash.items.indexOf(url) !== -1) {
-                //context.from =
-                context.from = hashes[0].pipe
-                    ? 'Pipe'
-                    : (hashes[0].hit ? 'Cache' : 'Server');
-                context.class = hashes[0].pipe
-                    ? 'pipe'
-                    : (hashes[0].hit ? 'cache' : 'server');
-
+                context.from = getFrom(hash);
+                context.class = getFrom(hash, true);
                 delete hashes[i];
                 continue;
             }
         }
 
+        var hashHTML = '';
         hashes.forEach(function(hash, i) {
             var url = '';
             for(var i in hash.items) {
@@ -110,10 +103,8 @@ function printLine(data) {
             }
 
             hashHTML += Mark.up(hashTemplate, {
-                from: hash.hit.pipe
-                    ? 'Pipe'
-                    : (hash.hit ? 'Cache' : 'Server'),
-                class: hash.pipe ? 'pipe' : (hash.hit ? 'cache' : 'server'),
+                from: getFrom(hash),
+                class: getFrom(hash, true),
                 items: url
             });
         });

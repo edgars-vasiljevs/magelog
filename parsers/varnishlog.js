@@ -38,7 +38,9 @@ function printLine(data) {
         return 'No URL found';
     }
 
-    var hashes = [];
+    var hashes = [],
+        hash = new Hash();
+
 
     data.tags.forEach(function(value, index) {
         var tag = value[0],

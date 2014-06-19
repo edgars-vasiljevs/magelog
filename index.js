@@ -3,6 +3,7 @@ var connect = require('connect')()
     .use(require('connect').static(__dirname))
     .listen(8081);
 Mark = require("markup-js");
+pd = require('pretty-data').pd;
 var spawn = require('child_process').spawn;
 var StreamSplitter = require("stream-splitter");
 var WebSocketServer = require('ws').Server;

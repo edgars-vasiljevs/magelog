@@ -68,5 +68,17 @@
         "isFile"    : false,
         "path"      : "varnishlog",
         "parser"    : "varnishlog"
+    },
+
+    "MySQL": {
+        "ssh"       : {
+            "host"  : "127.0.0.1",
+            "port"  : 2222,
+            "user"  : "vagrant",
+            "pass"  : "vagrant"
+        },
+        "isFile"    : true,
+        "path"      : "/vagrant/var/debug/pdo_mysql.log",
+        "parser"    : "mysql"
     }
 }

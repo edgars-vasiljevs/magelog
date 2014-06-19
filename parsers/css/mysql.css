@@ -1,0 +1,52 @@
+.mysql-query {
+    padding:0;
+    background:#111;
+    overflow:hidden;
+    margin:0 0 1px 0;
+    position:relative;
+}
+.mysql-query span {
+    float:left;
+    width:50px;
+    padding:5px;
+    text-align:center;
+    color:#303030;
+    margin-left:60px;
+}
+.mysql-query span:first-child {
+    position:absolute;
+    top:0;
+    left:0;
+    width:50px;
+    bottom:0;
+    margin:0;
+}
+.mysql-query .mysql-level5 {
+    background:red;
+    color:#053305;
+}
+.mysql-query .mysql-level4 {
+    background:#A35619;
+    color:#053305;
+}
+.mysql-query .mysql-level3 {
+    background:#A39819;
+    color:#053305;
+}
+.mysql-query .mysql-level2 {
+    background:#508A1A;
+    color:#053305;
+}
+.mysql-query .mysql-level1 {
+    background:green;
+    color:#053305;
+}
+.mysql-query div {
+    padding:5px 5px 5px 120px;
+}
+.mysql-transaction {
+    padding:10px;
+    text-align:center;
+    margin:0 0 1px 0;
+    background:#000;
+}

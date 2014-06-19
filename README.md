@@ -1,7 +1,7 @@
 MAGELOG
 =======
 
-Overview of Magento related logfiles
+Live overview of Magento related logfiles
 
 
 ## Installation

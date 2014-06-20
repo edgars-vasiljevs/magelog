@@ -3,7 +3,7 @@ var queryTemplate = '<div class="mysql-query">' +
                         '<span>{{affected}}</span>' +
                         '<div>{{sql}}</div>' +
                     '</div>',
-    transTemplate = '<div class="mysql-transaction">{{message}}</div>';
+    transTemplate = '<div class="mysql-transaction">{{message}} ({{time}})</div>';
 
 function Query() {
     this.sql = '';
@@ -117,7 +117,8 @@ module.exports = function(line) {
 
         transaction = false;
         return Mark.up(transTemplate, {
-            message: message
+            message: message,
+            time: RegExp.$1
         });
     }
 

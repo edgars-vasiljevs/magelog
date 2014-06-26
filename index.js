@@ -10,6 +10,8 @@ var WebSocketServer = require('ws').Server;
 var wss = new WebSocketServer({port: 8082});
 var fs = require('fs');
 var config = JSON.parse(fs.readFileSync('./config.json'));
+var processData = {};
+var processErrors = {};
 
 // Broadcast data to all clients
 wss.broadcast = function (data) {
@@ -28,6 +30,14 @@ wss.on('connection', function (ws) {
         }));
     });
 
+    Object.keys(processErrors).forEach(function (key) {
+        ws.send(JSON.stringify({
+            action: 'error',
+            id: key,
+            error: processErrors[key]
+        }));
+    });
+
     // Include CSS files
     fs.readdir('parsers/css/', function(err, files) {
         files.forEach(function(file, i) {
@@ -40,21 +50,59 @@ wss.on('connection', function (ws) {
 
 });
 
+var LineSplitter = function(key) {
+    var std = StreamSplitter("\n");
+    std.encoding = "utf8";
+    std.on("token", function (token) {
+        // Parse line if parser is set
+        if (processData[key].parser) {
+            token = processData[key].parser(token);
+        }
+        // broadcast log line
+        if (token) {
+            wss.broadcast(JSON.stringify({
+                action: 'line',
+                id: key,
+                line: token
+            }));
+        }
+    });
+    return std;
+};
+
+var ErrorSplitter = function(key) {
+    var std = StreamSplitter("\n");
+    std.encoding = "utf8";
+    std.on("token", function (error) {
+        if (/(No such file or directory|command not found)/g.test(error)) {
+            processErrors[key] = error;
+            wss.broadcast(JSON.stringify({
+                action: 'error',
+                id: key,
+                error: error
+            }));
+        }
+    });
+    return std;
+};
+
+
 // Load script
 (function (config) {
     // Loop config object
     Object.keys(config).forEach(function (key) {
-        var process = null,
-            std = StreamSplitter("\n"),
-            data = config[key],
-            params = [];
+        var process, data = config[key], params = [];
 
         // ssh?
         if (data.ssh) {
             params.push(data.ssh.user + '@' + data.ssh.host);
-            params.push('-p ' + data.ssh.port);
-            params.push((data.isFile ? 'tail -f ' : '') + data.path);
-
+            params.push('-p');
+            params.push(data.ssh.port);
+            if (data.isFile) {
+                params.push('tail');
+                params.push('-f');
+            }
+            params.push(data.path);
             process = spawn('ssh', params);
         }
         // nah, file/tool is on local machine
@@ -64,27 +112,17 @@ wss.on('connection', function (ws) {
                 : spawn(data.path);
         }
 
-        if (data.parser) {
-            var parser = require('./parsers/' + data.parser);
-        }
+        processData[key] = {
+            process: process,
+            data: data,
+            parser: data.parser
+                ? require('./parsers/' + data.parser)
+                : null
+        };
 
-        std.encoding = "utf8";
-        std.on("token", function (token) {
-            // Parse line if parser is set
-            if (parser) {
-                token = parser(token);
-            }
-
-            // broadcast log line
-            if (token) {
-                wss.broadcast(JSON.stringify({
-                    action: 'line',
-                    id: key,
-                    line: token
-                }));
-            }
-        });
-        process.stdout.pipe(std);
+        // Read std
+        process.stdout.pipe(new LineSplitter(key));
+        process.stderr.pipe(new ErrorSplitter(key));
     });
 
 })(config);

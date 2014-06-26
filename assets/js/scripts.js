@@ -143,6 +143,15 @@ var UI = {
 
         UI.updateTitle();
     },
+    error: function(json) {
+        var id = this.prepareId(json.id),
+            li = this.getLi(id);
+
+        li.addClass('error');
+        li.find('a')
+            .html(json.id)
+            .append('<span>' + json.error + '</span>');
+    },
     itemClick:function(id) {
         $('.content').hide();
 

@@ -69,7 +69,7 @@ var UI = {
         UI.updateTitle();
     },
     prepareId:function(id) {
-        return id.toLowerCase().replace(' ', '_');
+        return id.toLowerCase().replace(/ /g, '_');
     },
     getLi:function(id) {
         return $('#item_' + id);

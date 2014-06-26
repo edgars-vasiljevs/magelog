@@ -35,7 +35,7 @@ Open http://127.0.0.1:8081
 ### Notes
 - Intended in development process and not for live servers! 
 - Works only on *unix systems - mac, linux
-- NodeJS version 0.10.* required. Not tested on older versions
+- NodeJS version 0.10.* required. Default Ubuntu packaging tool installs old version of NodeJS. Google how to install latest version.
 - MySQL log can be enabled in `/lib/Varien/Db/Adapter/Pdo/Mysql.php`
 - Magento system log and exception are disabled by default. It can be enabled in `System -> Configuration -> Developer -> Log Settings`
 - If you are using virtualbox, add your public key to authorized keys on virtual machine so it doesn't ask for password each time

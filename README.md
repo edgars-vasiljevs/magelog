@@ -33,6 +33,7 @@ Open http://127.0.0.1:8081
 
 
 ### Notes
+- Intended in development process and not for live servers! 
 - Works only on *unix systems - mac, linux
 - NodeJS version 0.10.* required. Not tested on older versions
 - MySQL log can be enabled in `/lib/Varien/Db/Adapter/Pdo/Mysql.php`

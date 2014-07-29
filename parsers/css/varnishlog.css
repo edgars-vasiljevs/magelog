@@ -27,6 +27,10 @@
     background:green;
     color:black;
 }
+.varnish-from-pass {
+    background:#60D860;
+    color:black;
+}
 .varnish-from-server {
     background:#9E0101;
     color:#460505;

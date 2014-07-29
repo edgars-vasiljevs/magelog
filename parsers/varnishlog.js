@@ -21,12 +21,22 @@ function Hash() {
     this.items = [];
     this.hit = false;
     this.pipe = false;
+    this.pass = false;
     return this;
 }
 
 function getFrom(hash, lower) {
-    var from = hash.pipe ? 'Pipe' : (hash.hit ? 'Cache' : 'Server');
-    return lower ? from.toLowerCase() : from;
+    var output = 'Server';
+    if (hash.pipe) {
+        output = 'Pipe';
+    }
+    else if (hash.hit) {
+        output = 'Cache';
+    }
+    else if (hash.pass) {
+        output = 'Pass';
+    }
+    return lower ? output.toLowerCase() : output;
 }
 
 function printLine(data) {
@@ -70,7 +80,10 @@ function printLine(data) {
             hash.pipe = true;
             hashes.push(hash);
         }
-
+        else if (tag == 'VCL_call' && value == 'pass pass') {
+            hash.pass = true;
+            hashes.push(hash);
+        }
     });
 
     var context = {
